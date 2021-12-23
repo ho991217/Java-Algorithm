@@ -1,6 +1,8 @@
 package com.company;
 
 
+import java.util.Scanner;
+
 class Stack<T> {
     private class Node{
         private int value;
@@ -58,17 +60,46 @@ class Stack<T> {
     }
 
     int pop() {
+        Node prev;
+        Node cur;
+        if (isempty()) {
+            return 0;
+        }
+        else {
+            if (tail.next == null) {
+                Node tmp = tail;
+                head = null;
+                tail = null;
+                return tmp.value;
+            } else {
+                prev = tail;
+                cur = tail;
+
+                while (cur.next != null) {
+                    prev = cur;
+                    cur = cur.next;
+                }
+                prev.next = null;
+                return cur.value;
+            }
+        }
+    }
+
+    int answer() {
+        int answer = 0;
+
         if (isempty()) {
             return 0;
         } else {
             Node cur = this.head;
-            while (cur.next.next != null) {
+            while (cur != null) {
+                answer += cur.value;
                 cur = cur.next;
             }
-            Node tmp = cur.next;
-            cur.next = null;
-            return tmp.value;
+            return answer;
         }
+
+
     }
 
     boolean isempty() {
@@ -83,10 +114,17 @@ public class Main {
 
     public static void main(String[] args) {
 	    Stack<Integer> s = new Stack<Integer>();
-        s.push(1);
-        s.push(2);
-        s.peek();
-        System.out.println(s.pop());
-        s.peek();
+        Scanner sc = new Scanner(System.in);
+        int K = sc.nextInt();
+
+        for (int i = 0; i < K; i++) {
+            int number = sc.nextInt();
+            if (number == 0) {
+                s.pop();
+            } else {
+                s.push(number);
+            }
+        }
+        System.out.println(s.answer());
     }
 }
