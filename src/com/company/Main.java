@@ -134,7 +134,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-class Stack<T> {
+class Stack {
     int [] stack;
     int stackSize;
     int top;
@@ -156,6 +156,7 @@ class Stack<T> {
         if (this.stack[this.stack.length - 1] != 0) {
             return true;
         }
+
         return false;
     }
 
@@ -199,7 +200,7 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(bf.readLine());
-        Stack<Integer> s = new Stack<Integer>(N);
+        Stack s = new Stack(N);
         for (int i=0; i < N; i++){
             int number = Integer.parseInt(bf.readLine());
 
