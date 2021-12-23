@@ -36,18 +36,39 @@ class Stack<T> {
             this.head = newNode;
             this.tail = this.head;
         } else {
-            this.tail.next = newNode;
-            this.tail = newNode;
+            Node tmp = tail;
+            while (tmp.next != null) {
+                tmp = tmp.next;
+            }
+            tmp.next = newNode;
         }
     }
 
-    void show() {
-        Node cur = this.head;
-        while (cur.next != null) {
-            System.out.print(cur.value);
-            cur = cur.next;
+    int peek() {
+        if (isempty()) {
+            return 0;
+        } else {
+            Node cur = this.head;
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+            System.out.println(cur.value);
+            return cur.value;
         }
+    }
 
+    int pop() {
+        if (isempty()) {
+            return 0;
+        } else {
+            Node cur = this.head;
+            while (cur.next.next != null) {
+                cur = cur.next;
+            }
+            Node tmp = cur.next;
+            cur.next = null;
+            return tmp.value;
+        }
     }
 
     boolean isempty() {
@@ -63,6 +84,9 @@ public class Main {
     public static void main(String[] args) {
 	    Stack<Integer> s = new Stack<Integer>();
         s.push(1);
-        s.show();
+        s.push(2);
+        s.peek();
+        System.out.println(s.pop());
+        s.peek();
     }
 }
